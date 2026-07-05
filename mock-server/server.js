@@ -7,6 +7,7 @@ const { WebSocketServer } = require("ws");
 const app = express();
 app.use(cors());
 const server = http.createServer(app);
+const PORT = process.env.PORT || 4000;
 
 const TYPES = ["image", "audio", "text", "image", "text"]; // 'video' (unknown) appears below
 const STATUSES = ["in_progress", "InProgress", "done", "QA", "todo", "BLOCKED"];
@@ -137,6 +138,6 @@ wss.on("connection", (ws) => {
   ws.on("close", () => clearInterval(timer));
 });
 
-server.listen(4000, () =>
-  console.log("mock on http://localhost:4000 (ws://localhost:4000/ws)"),
+server.listen(PORT, () =>
+  console.log(`mock listening on port ${PORT} (ws path: /ws)`),
 );
